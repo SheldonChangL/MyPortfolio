@@ -27,7 +27,6 @@ const About = () => {
                     <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white">
                         {t('aboutTitle')}
                     </h2>
-                    <p className="text-lg text-gray-500 dark:text-gray-400 mt-2">{t('aboutSubtitle')}</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-16 items-center">

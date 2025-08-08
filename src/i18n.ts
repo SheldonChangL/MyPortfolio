@@ -15,7 +15,6 @@ i18n
             en: {
                 translation: {
                     about: 'About Me',
-                    aboutSubtitle: 'Career Overview"',
                     aboutTitle: 'About Me',
                     bio: 'I am a Senior Software Asistant Manager with years of practical experience, having led multiple development projects. I am proficient in Android App development, Node.js backend service construction, and frontend technologies including AngularJS and React. I play a key role in the software development lifecycle, providing in-depth insights and efficient solutions from initial requirements analysis to software architecture design.Furthermore, I excel at team capability building and coordination, effectively enhancing overall team development efficiency and technical proficiency through knowledge sharing and mentorship. Combining my technical expertise with management capabilities, I can bring exceptional execution to projects, ensuring the delivery of high- quality software.',
                     company: 'Company',
@@ -77,7 +76,6 @@ i18n
             zh: {
                 translation: {
                     about: '關於我',
-                    aboutSubtitle: '職業生涯概覽',
                     aboutTitle: '關於我',
                     bio: '我是一名資深軟體副理，具備多年的實戰經驗，曾領導多個開發專案，並精通 Android App 開發、Node.js 後端服務建置，以及 AngularJS 與 React 前端技術。 我在軟體開發生命週期中扮演關鍵角色，從最初的需求分析到軟體架構設計，都能提供深入見解與高效解決方案。此外，我亦擅長團隊能力培養與協調，透過知識分享與指導，有效提升團隊整體開發效率與技術水準。綜合我的技術專長與管理能力，我能為專案帶來卓越的執行力，確保高品質的軟體交付。',
                     company: '公司',
