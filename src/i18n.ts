@@ -1,13 +1,13 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
+// import LanguageDetector from 'i18next-browser-languagedetector';
 
 i18n
-    .use(LanguageDetector)
+    // .use(LanguageDetector)
     .use(initReactI18next)
     .init({
         debug: true,
-        fallbackLng: 'zh',
+        fallbackLng: 'en',
         interpolation: {
             escapeValue: false,
         },
@@ -35,6 +35,7 @@ i18n
                     experienceTitle: 'Work Experience',
                     hello: 'Hello, I\'m',
                     heroSubtitle: 'I am a senior software engineer with a strong background in team leadership and project management. My expertise lies in full-stack development, including Android apps, Node.js backends, and front-end technologies like React and AngularJS. I excel at improving team efficiency and delivering high-quality, scalable software solutions.',
+                    infomation: 'Personal Info',
                     jobTitle: 'Assistant Manager',
                     jobTitle_am: 'Assistant Manager',
                     jobTitle_se: 'Software Engineer',
@@ -96,6 +97,7 @@ i18n
                     experienceTitle: '工作經歷',
                     hello: 'Hello, I\'m',
                     heroSubtitle: '我是一名資深軟體工程師，具備扎實的團隊領導與專案管理背景。我的專長是全端開發，涵蓋 Android 應用程式、Node.js 後端，以及 React 和 AngularJS 等前端技術。我擅長提升團隊效率，並交付高品質、可擴展的軟體解決方案。',
+                    infomation: '個人資訊',
                     jobTitle: '副理',
                     jobTitle_am: '副理',
                     jobTitle_se: '軟體工程師',

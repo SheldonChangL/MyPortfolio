@@ -54,7 +54,7 @@ const About = () => {
                         <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 border-t pt-8 border-gray-200 dark:border-gray-700">
                             {/* Contact Info */}
                             <div>
-                                <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-3">聯絡方式</h4>
+                                <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-3">{t('infomation')}</h4>
                                 <ul className="space-y-3 text-gray-600 dark:text-gray-400">
                                     <li className="flex items-center text-sm">
                                         <BuildingOffice2Icon className="h-5 w-5 mr-3 text-indigo-500" />
