@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import About from './components/About';
 import Hero from './components/Hero';
 import Navbar from './components/Navbar';
+import Experience from './components/Experience';
 import './App.css'
 function App() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -23,6 +24,7 @@ function App() {
       <main>
         <Hero />
         <About />
+        <Experience />
       </main>
     </div>
   )

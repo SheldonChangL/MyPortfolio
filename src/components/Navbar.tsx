@@ -37,7 +37,7 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled }) => {
                     <div className="hidden md:block">
                         <div className="ml-10 flex items-center space-x-4">
                             <a href="#about" className="text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950 px-3 py-2 rounded-md text-sm font-medium">{t('about')}</a>
-                            <a href="#" className="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-indigo-600 dark:hover:text-indigo-400 px-3 py-2 rounded-md text-sm font-medium">{t('experience')}</a>
+                            <a href="#experience" className="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-indigo-600 dark:hover:text-indigo-400 px-3 py-2 rounded-md text-sm font-medium">{t('experience')}</a>
                             <a href="#" className="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-indigo-600 dark:hover:text-indigo-400 px-3 py-2 rounded-md text-sm font-medium">{t('projects')}</a>
                             <button
                                 onClick={handleLanguageToggle}
@@ -78,7 +78,7 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled }) => {
                 <div className="md:hidden  bg-white dark:bg-gray-900" id="mobile-menu">
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                         <a href="#about" className="bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 block px-3 py-2 rounded-md text-base font-medium">{t('about')}</a>
-                        <a href="#" className="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-indigo-600 dark:hover:text-indigo-400 block px-3 py-2 rounded-md text-base font-medium">{t('experience')}</a>
+                        <a href="#experience" className="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-indigo-600 dark:hover:text-indigo-400 block px-3 py-2 rounded-md text-base font-medium">{t('experience')}</a>
                         <a href="#" className="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-indigo-600 dark:hover:text-indigo-400 block px-3 py-2 rounded-md text-base font-medium">{t('projects')}</a>
                     </div>
                 </div>

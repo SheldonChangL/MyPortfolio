@@ -64,7 +64,7 @@ const Hero = () => {
 
                     <div className="md:w-1/2 text-center md:text-left">
                         <h1 className="text-left text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-gray-900 dark:text-white leading-tight">
-                            <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl ">{t('Hello, I\'m')}</span>
+                            <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl ">{t('hello')}</span>
                             <span className="block text-indigo-600 dark:text-indigo-400 mt-2">{t('name')}</span>
                         </h1>
                         <p className="mt-6 max-w-xl mx-auto md:mx-0 text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300">
