@@ -2,25 +2,22 @@ import { useTranslation } from 'react-i18next';
 import {
     AcademicCapIcon,
     BuildingOffice2Icon,
-    MapPinIcon,
-    CodeBracketIcon,
-    UserGroupIcon,
-    WrenchScrewdriverIcon,
-    CommandLineIcon,
+    // MapPinIcon,
+    EnvelopeIcon,
     DevicePhoneMobileIcon,
-    CloudIcon
 } from '@heroicons/react/24/solid';
 
 const About = () => {
     const { t } = useTranslation();
 
+    const contact = {
+        email: 'ebscream4me@gmail.com',
+        mobile: '0905-560-308',
+    };
+
     const skills = [
-        { name: t('skill1'), icon: <WrenchScrewdriverIcon className="h-8 w-8 text-white" /> },
-        { name: t('skill2'), icon: <UserGroupIcon className="h-8 w-8 text-white" /> },
-        { name: t('skill3'), icon: <DevicePhoneMobileIcon className="h-8 w-8 text-white" /> },
-        { name: t('skill4'), icon: <CommandLineIcon className="h-8 w-8 text-white" /> },
-        { name: t('skill5'), icon: <CodeBracketIcon className="h-8 w-8 text-white" /> },
-        { name: t('skill6'), icon: <CloudIcon className="h-8 w-8 text-white" /> },
+        t('skill1'), t('skill2'), t('skill3'),
+        t('skill4'), t('skill5'), t('skill6'),
     ];
 
     return (
@@ -33,45 +30,65 @@ const About = () => {
                     <p className="text-lg text-gray-500 dark:text-gray-400 mt-2">{t('aboutSubtitle')}</p>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-16 items-center">
 
-                    {/* Left Column: Bio & Info */}
-                    <div className="space-y-8">
-                        <h3 className="text-3xl font-bold text-gray-800 dark:text-gray-100">{t('name')}</h3>
-                        <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-inner">
-                            <ul className="space-y-4 text-gray-700 dark:text-gray-300">
-                                <li className="flex items-center">
-                                    <BuildingOffice2Icon className="h-6 w-6 text-indigo-500 mr-3 flex-shrink-0" />
-                                    <span>{t('jobTitle')}</span>
-                                </li>
-                                <li className="flex items-center">
-                                    <AcademicCapIcon className="h-6 w-6 text-indigo-500 mr-3 flex-shrink-0" />
-                                    <span>{t('educationName')}</span>
-                                </li>
-                                <li className="flex items-center">
-                                    <MapPinIcon className="h-6 w-6 text-indigo-500 mr-3 flex-shrink-0" />
-                                    <span>{t('locationName')}</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-justify">
+                    {/* Left Column: Profile Picture */}
+                    <div className="md:col-span-1 flex justify-center">
+                        <img
+                            src="/Self.png"
+                            alt={t('name')}
+                            className="w-full max-w-xs object-cover rounded-lg shadow-xl border-4 border-white dark:border-gray-800"
+                        />
+                    </div>
+
+                    {/* Right Column: Description, Contact, Skills */}
+                    <div className="md:col-span-2 flex flex-col h-full">
+                        {/* Bio Description */}
+                        <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify mb-8">
                             {t('bio')}
                         </p>
-                    </div>
 
-                    {/* Right Column: Skills */}
-                    <div className="mt-8 lg:mt-0">
-                        <h3 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-8">{t('skillsTitle')}</h3>
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                            {skills.map((skill) => (
-                                <div key={skill.name} className="bg-gradient-to-br from-indigo-500 to-cyan-500 p-4 rounded-lg shadow-lg text-center flex flex-col items-center justify-center aspect-square transition-transform hover:-translate-y-1 hover:shadow-xl">
-                                    {skill.icon}
-                                    <span className="mt-2 text-white font-semibold text-sm">{skill.name}</span>
+                        {/* Spacer to push content to the bottom */}
+                        <div className="flex-grow"></div>
+
+                        {/* Contact & Skills Section */}
+                        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 border-t pt-8 border-gray-200 dark:border-gray-700">
+                            {/* Contact Info */}
+                            <div>
+                                <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-3">聯絡方式</h4>
+                                <ul className="space-y-3 text-gray-600 dark:text-gray-400">
+                                    <li className="flex items-center text-sm">
+                                        <BuildingOffice2Icon className="h-5 w-5 mr-3 text-indigo-500" />
+                                        <span>{t('companyName')}</span>
+                                    </li>
+                                    <li className="flex items-center text-sm">
+                                        <AcademicCapIcon className="h-5 w-5 mr-3 text-indigo-500" />
+                                        <span>{t('educationName')}</span>
+                                    </li>
+                                    <li className="flex items-center text-sm">
+                                        <EnvelopeIcon className="h-5 w-5 mr-3 text-indigo-500" />
+                                        <a href={`mailto:${contact.email}`} className="hover:underline">{contact.email}</a>
+                                    </li>
+                                    <li className="flex items-center text-sm">
+                                        <DevicePhoneMobileIcon className="h-5 w-5 mr-3 text-indigo-500" />
+                                        <a href={`tel:${contact.mobile}`} className="hover:underline">{contact.mobile}</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            {/* Skills */}
+                            <div>
+                                <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-3">{t('skillsTitle')}</h4>
+                                <div className="flex flex-wrap gap-2">
+                                    {skills.map(skill => (
+                                        <span key={skill} className="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs font-medium px-3 py-1 rounded-full">
+                                            {skill}
+                                        </span>
+                                    ))}
                                 </div>
-                            ))}
+                            </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
