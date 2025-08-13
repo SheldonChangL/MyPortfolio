@@ -73,6 +73,15 @@ i18n
                     skill6: 'Cross-functional Communication',
                     skillsTitle: 'Key Skills',
                     technologiesLabel: 'Technologies Used',
+                    bentleyProjectName: 'Bentley Rear Seat Entertainment System',
+                    bentleyProjectDescription: 'A premium entertainment system for the rear seats of Bentley vehicles, offering a rich multimedia experience.',
+                    bentleyProjectArchitecture: "This entertainment system is built on the Yocto Linux platform. I was responsible for the development of the entire upper-layer application, which includes the Web HMI (developed with Angular and HTML5) and the Web Server that acts as a bridge between the UI and the system's hardware. The server communicates with the Microcontroller Unit (MCU) via a serial port for hardware-level interactions. It utilizes both Shell commands and Unix Sockets to interface with the underlying operating system for various control and data retrieval tasks. Additionally, it provides an HTTP and WebSocket API to enable real-time communication between the backend and the HMI.",
+                    projectTwoName: "Project Two Placeholder",
+                    projectTwoDescription: "Description for the second project goes here.",
+                    projectTwoArchitecture: "Architecture details for the second project.",
+                    projectThreeName: "Project Three Placeholder",
+                    projectThreeDescription: "Description for the third project goes here.",
+                    projectThreeArchitecture: "Architecture details for the third project.",
                 }
             },
             zh: {
@@ -136,6 +145,9 @@ i18n
                     skill6: '跨部門溝通',
                     skillsTitle: '關鍵技能',
                     technologiesLabel: '使用技術',
+                    bentleyProjectName: 'Bentley 後座娛樂系統',
+                    bentleyProjectDescription: '為賓利汽車後座打造的頂級娛樂系統，提供豐富的多媒體體驗。',
+                    bentleyProjectArchitecture: '此娛樂系統建立於 Yocto Linux 平台之上。我負責整個上層應用程式的開發，包含以 Angular 及 HTML5 開發的 Web HMI，以及作為使用者介面與系統硬體之間橋樑的 Web Server。此伺服器透過串列埠 (Serial port) 與微控制器單元 (MCU) 進行通訊，以處理硬體層級的互動，並利用 Shell 命令及 Unix Socket 與底層作業系統進行溝通，執行各種控制與資料檢索任務。同時，它也提供 HTTP 與 WebSocket API，實現後端與 HMI 之間的即時通訊。',
                 }
             }
         }
