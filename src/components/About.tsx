@@ -6,6 +6,7 @@ import {
     EnvelopeIcon,
     DevicePhoneMobileIcon,
 } from '@heroicons/react/24/solid';
+import ScrollDownArrow from './ScrollDownArrow';
 
 const About = () => {
     const { t } = useTranslation();
@@ -21,7 +22,7 @@ const About = () => {
     ];
 
     return (
-        <section id="about" className="py-20 bg-white dark:bg-gray-900">
+        <section id="about" className="relative py-20 bg-white dark:bg-gray-900 min-h-screen flex items-center">
             <div className="container mx-auto px-6">
                 <div className="text-center mb-16">
                     <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white">
@@ -90,6 +91,8 @@ const About = () => {
                     </div>
                 </div>
             </div>
+
+            <ScrollDownArrow href="#experience" />
         </section>
     );
 };

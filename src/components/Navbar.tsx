@@ -5,16 +5,32 @@ import myLogo from '../assets/logo.png';
 
 interface NavbarProps {
     isScrolled: boolean;
+    activeSection: string;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ isScrolled }) => {
+const Navbar: React.FC<NavbarProps> = ({ isScrolled, activeSection }) => {
 
     const { t, i18n } = useTranslation();
     const [isOpen, setIsOpen] = useState(false);
 
+    const navItems = [
+        { href: '#about', labelKey: 'about' },
+        { href: '#experience', labelKey: 'experience' },
+        { href: '#projects', labelKey: 'projects' },
+    ];
+
     const handleLanguageToggle = () => {
         const newLang = i18n.language === 'zh' ? 'en' : 'zh';
         i18n.changeLanguage(newLang);
+    };
+
+    const getLinkClass = (href: string, isMobile: boolean = false) => {
+        const isActive = activeSection === href.substring(1);
+        const baseClasses = isMobile ? "block px-3 py-2 rounded-md text-base font-medium" : "px-3 py-2 rounded-md text-sm font-medium";
+        const activeClasses = isMobile ? "bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400" : "text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950";
+        const inactiveClasses = "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-indigo-600 dark:hover:text-indigo-400";
+
+        return `${baseClasses} ${isActive ? activeClasses : inactiveClasses}`;
     };
 
     const navClass = isScrolled
@@ -26,7 +42,7 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled }) => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     <div className="flex-shrink-0">
-                        <a href="#" className="text-black dark:text-white font-bold text-xl" aria-label="Home">
+                        <a href="#hero" className="text-black dark:text-white font-bold text-xl" aria-label="Home">
                             <img
                                 src={myLogo}
                                 alt="MyLogo"
@@ -36,9 +52,11 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled }) => {
                     </div>
                     <div className="hidden md:block">
                         <div className="ml-10 flex items-center space-x-4">
-                            <a href="#about" className="text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950 px-3 py-2 rounded-md text-sm font-medium">{t('about')}</a>
-                            <a href="#experience" className="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-indigo-600 dark:hover:text-indigo-400 px-3 py-2 rounded-md text-sm font-medium">{t('experience')}</a>
-                            <a href="#" className="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-indigo-600 dark:hover:text-indigo-400 px-3 py-2 rounded-md text-sm font-medium">{t('projects')}</a>
+                            {navItems.map(item => (
+                                <a key={item.href} href={item.href} className={getLinkClass(item.href)}>
+                                    {t(item.labelKey)}
+                                </a>
+                            ))}
                             <button
                                 onClick={handleLanguageToggle}
                                 className="p-2 rounded-full bg-gray-50 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
@@ -77,7 +95,6 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled }) => {
             {isOpen && (
                 <div className="md:hidden  bg-white dark:bg-gray-900" id="mobile-menu">
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                        <a href="#about" className="bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 block px-3 py-2 rounded-md text-base font-medium">{t('about')}</a>
                         <a href="#experience" className="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-indigo-600 dark:hover:text-indigo-400 block px-3 py-2 rounded-md text-base font-medium">{t('experience')}</a>
                         <a href="#" className="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-indigo-600 dark:hover:text-indigo-400 block px-3 py-2 rounded-md text-base font-medium">{t('projects')}</a>
                     </div>

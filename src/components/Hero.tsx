@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ArrowDownIcon } from '@heroicons/react/24/outline';
+import ScrollDownArrow from './ScrollDownArrow';
 
 const Hero = () => {
     const { t } = useTranslation();
@@ -73,7 +73,7 @@ const Hero = () => {
                         <div className="mt-8">
                             <a href="#about"
                                 className="inline-block bg-indigo-100 text-indigo-800 font-bold py-3 px-8 rounded-md hover:bg-indigo-200 transition-colors duration-300 shadow-lg text-lg dark:bg-transparent dark:border dark:border-indigo-400 dark:text-indigo-400 dark:hover:bg-indigo-900"    >
-                                {t('learnMore')}。
+                                {t('learnMore')}
                             </a>
                         </div>
                     </div>
@@ -93,11 +93,7 @@ const Hero = () => {
                 </div>
             </div>
 
-            <div className="absolute bottom-10 left-1/2 -translate-x-1/2">
-                <a href="#about" aria-label="Scroll down">
-                    <ArrowDownIcon className="h-8 w-8 text-gray-500 dark:text-gray-400 animate-bounce" />
-                </a>
-            </div>
+            <ScrollDownArrow href="#about" />
         </section>
     );
 };
