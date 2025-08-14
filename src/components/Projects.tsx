@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 import ScrollArrow from './ScrollArrow';
+import portfolioLogo from '../assets/logo.png';
 
 interface Project {
     nameKey: string;
@@ -37,7 +38,7 @@ const Projects = () => {
             architectureKey: 'portfolioProjectArchitecture',
             technologies: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Firebase', 'GitHub Actions'],
             link: 'https://github.com/sheldonchangl/myportfolio',
-            image: '/src/assets/logo.png',
+            image: portfolioLogo,
         },
     ];
 
