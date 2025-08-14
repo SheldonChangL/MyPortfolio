@@ -76,12 +76,12 @@ i18n
                     bentleyProjectName: 'Bentley Rear Seat Entertainment System',
                     bentleyProjectDescription: 'A premium entertainment system for the rear seats of Bentley vehicles, offering a rich multimedia experience.',
                     bentleyProjectArchitecture: "This entertainment system is built on the Yocto Linux platform. I was responsible for the development of the entire upper-layer application, which includes the Web HMI (developed with Angular and HTML5) and the Web Server that acts as a bridge between the UI and the system's hardware. The server communicates with the Microcontroller Unit (MCU) via a serial port for hardware-level interactions. It utilizes both Shell commands and Unix Sockets to interface with the underlying operating system for various control and data retrieval tasks. Additionally, it provides an HTTP and WebSocket API to enable real-time communication between the backend and the HMI.",
-                    projectTwoName: "Project Two Placeholder",
-                    projectTwoDescription: "Description for the second project goes here.",
-                    projectTwoArchitecture: "Architecture details for the second project.",
-                    projectThreeName: "Project Three Placeholder",
-                    projectThreeDescription: "Description for the third project goes here.",
-                    projectThreeArchitecture: "Architecture details for the third project.",
+                    portfolioProjectName: "My Portfolio Website",
+                    portfolioProjectDescription: "A personal portfolio website to showcase my skills and experience, built with React and Vite.",
+                    portfolioProjectArchitecture: "This portfolio is a single-page application built with React, TypeScript, and Vite, styled with Tailwind CSS. It is automatically deployed to Firebase Hosting via a CI/CD pipeline using GitHub Actions. The workflow triggers on pushes to the main branch, installing dependencies, building the project, and deploying it.",
+                    vigorplusProjectName: 'VigorPlus App',
+                    vigorplusProjectDescription: 'An application designed for JET Optoelectronics\' automotive electronic products, allowing users to connect to dashcams for real-time viewing, playback, and settings configuration.',
+                    vigorplusProjectArchitecture: 'A native Android application developed in Kotlin with a modularized DVR component. It utilizes VLC for playing RTSP streams, enabling real-time viewing and playback of recorded files.',
                 }
             },
             zh: {
@@ -148,6 +148,13 @@ i18n
                     bentleyProjectName: 'Bentley 後座娛樂系統',
                     bentleyProjectDescription: '為賓利汽車後座打造的頂級娛樂系統，提供豐富的多媒體體驗。',
                     bentleyProjectArchitecture: '此娛樂系統建立於 Yocto Linux 平台之上。我負責整個上層應用程式的開發，包含以 Angular 及 HTML5 開發的 Web HMI，以及作為使用者介面與系統硬體之間橋樑的 Web Server。此伺服器透過串列埠 (Serial port) 與微控制器單元 (MCU) 進行通訊，以處理硬體層級的互動，並利用 Shell 命令及 Unix Socket 與底層作業系統進行溝通，執行各種控制與資料檢索任務。同時，它也提供 HTTP 與 WebSocket API，實現後端與 HMI 之間的即時通訊。',
+                    portfolioProjectName: "個人作品集網站",
+                    portfolioProjectDescription: "一個用於展示我的技能和經驗的個人作品集網站，使用 React 和 Vite 開發。",
+                    portfolioProjectArchitecture: "此作品集是使用 React、TypeScript 和 Vite 建立的單頁應用程式，並以 Tailwind CSS 進行樣式設計。它透過 GitHub Actions 的 CI/CD 流程自動部署到 Firebase Hosting。此工作流程會在推送到 main 分支時觸發，自動安裝依賴、建置專案並進行部署。",
+                    vigorplusProjectName: 'VigorPlus App',
+                    vigorplusProjectDescription: '專為凱銳光電旗下車用電子產品設計的應用程式，讓使用者能連接行車紀錄器等設備，進行即時影像觀看、回放與設定。',
+                    vigorplusProjectArchitecture: '這是一款以 Kotlin 開發的原生 Android 應用程式，並將 DVR 功能模組化。它利用 VLC 播放器來處理 RTSP 串流，實現了即時影像觀看和已錄製檔案的回放功能。',
+
                 }
             }
         }

@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { BriefcaseIcon, MapPinIcon } from '@heroicons/react/24/solid';
+import ScrollArrow from './ScrollArrow';
 
 interface Project {
     name: string;
@@ -92,7 +93,7 @@ const Experience = () => {
     ];
 
     return (
-        <section id="experience" className="py-20 bg-gray-50 dark:bg-gray-800">
+        <section id="experience" className="relative py-20 bg-gray-50 dark:bg-gray-800">
             <div className="container mx-auto px-6">
                 <div className="text-center mb-16">
                     <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white">
@@ -196,6 +197,7 @@ const Experience = () => {
                     ))}
                 </div>
             </div>
+            <ScrollArrow href="#projects" direction="down"/>
         </section>
     );
 };

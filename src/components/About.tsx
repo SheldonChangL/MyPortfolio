@@ -6,7 +6,7 @@ import {
     EnvelopeIcon,
     DevicePhoneMobileIcon,
 } from '@heroicons/react/24/solid';
-import ScrollDownArrow from './ScrollDownArrow';
+import ScrollArrow from './ScrollArrow';
 
 const About = () => {
     const { t } = useTranslation();
@@ -92,7 +92,7 @@ const About = () => {
                 </div>
             </div>
 
-            <ScrollDownArrow href="#experience" />
+            <ScrollArrow href="#experience" direction="down"/>
         </section>
     );
 };

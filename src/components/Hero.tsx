@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import ScrollDownArrow from './ScrollDownArrow';
+import ScrollArrow from './ScrollArrow';
 
 const Hero = () => {
     const { t } = useTranslation();
@@ -93,7 +93,7 @@ const Hero = () => {
                 </div>
             </div>
 
-            <ScrollDownArrow href="#about" />
+            <ScrollArrow href="#about" direction='down'/>
         </section>
     );
 };
