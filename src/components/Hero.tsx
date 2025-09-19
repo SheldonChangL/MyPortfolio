@@ -81,7 +81,7 @@ const Hero = () => {
                     <div className="md:w-1/3">
                         <div className="relative w-64 h-64 sm:w-80 sm:h-80 mx-auto">
                             <div className="absolute inset-0 bg-gradient-to-br from-indigo-400 to-cyan-400 rounded-full shadow-2xl hero-gradient-spin"></div>
-                            <img ref={imageRef} src="/Self.png"
+                            <img ref={imageRef} src="/profile_circle.png"
                                 alt={t('name')}
                                 className="relative w-full h-full object-cover rounded-full border-4 border-white dark:border-gray-800 transition-transform duration-75 ease-out"
                                 style={{
