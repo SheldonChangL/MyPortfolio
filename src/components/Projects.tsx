@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { ArrowUpRightIcon } from '@heroicons/react/24/outline'; // 確保安裝了 @heroicons/react
+import { ArrowUpRightIcon } from '@heroicons/react/24/outline';
 import ScrollArrow from './ScrollArrow';
 import portfolioLogo from '../assets/logo.png';
 
@@ -10,7 +10,6 @@ interface Project {
     technologies: string[];
     link: string;
     image: string;
-    // 新增 colSpan 控制 Bento Grid 佈局
     colSpan: string;
 }
 
@@ -25,7 +24,7 @@ const Projects = () => {
             technologies: ['Angular', 'Node.js', 'Yocto Linux', 'WebSocket'],
             link: 'https://www.whichcar.com.au/news/bentley-rear-seats-entertainment-system',
             image: 'https://s1.cdn.autoevolution.com/images/news/gallery/bentley-unveils-new-entertainment-system-so-you-can-netflix-and-chill-in-your-bentayga_2.jpg',
-            colSpan: 'md:col-span-2', // 大卡片
+            colSpan: 'md:col-span-2',
         },
         {
             nameKey: 'vigorplusProjectName',
@@ -34,7 +33,7 @@ const Projects = () => {
             technologies: ['Android', 'Kotlin', 'RTSP', 'VLC'],
             link: 'https://play.google.com/store/apps/details?id=com.jetopto.vigorplus.products&hl=zh_TW',
             image: 'https://play-lh.googleusercontent.com/AZ89SOsTvmON-9iYCFKKknSRN5jJIw8zbn8JRv1Ahcg1034Z6oq4TmMl26TKTB7d6vs=w240-h480-rw', // 建議檢查這個連結是否有效，若無效請換圖
-            colSpan: 'md:col-span-1', // 小卡片
+            colSpan: 'md:col-span-1',
         },
         {
             nameKey: 'portfolioProjectName',
@@ -43,7 +42,7 @@ const Projects = () => {
             technologies: ['React', 'Vite', 'Tailwind', 'CI/CD'],
             link: 'https://github.com/sheldonchangl/myportfolio',
             image: portfolioLogo,
-            colSpan: 'md:col-span-3', // 全寬卡片
+            colSpan: 'md:col-span-3',
         },
     ];
 

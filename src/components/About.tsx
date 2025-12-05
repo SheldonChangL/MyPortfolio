@@ -25,19 +25,18 @@ const About = () => {
             <div className="container mx-auto px-6">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
 
-                    {/* Title Column */}
-                    <div className="lg:col-span-4">
+                    {/* Title Column & Image */}
+                    <div className="lg:col-span-4 text-center lg:text-left">
                         <h2 className="text-4xl font-bold text-white mb-8 sticky top-32">
                             {t('aboutTitle')}
                         </h2>
                         <img
                             src="/Self.png"
                             alt={t('name')}
-                            className="w-48 h-48 object-cover rounded-2xl grayscale hover:grayscale-0 transition-all duration-500 border border-zinc-800"
+                            className="w-64 h-64 md:w-80 md:h-80 object-cover rounded-3xl grayscale hover:grayscale-0 transition-all duration-500 border-2 border-zinc-800 hover:border-indigo-500/50 shadow-2xl mx-auto lg:mx-0"
                         />
                     </div>
 
-                    {/* Content Column */}
                     <div className="lg:col-span-8">
                         <div className="prose prose-invert max-w-none mb-12">
                             <p className="text-lg text-zinc-400 leading-relaxed">
@@ -46,7 +45,6 @@ const About = () => {
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            {/* Contact Info Card */}
                             <div className="p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800 hover:border-zinc-700 transition-colors">
                                 <h4 className="text-white font-semibold mb-6 flex items-center gap-2">
                                     <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
@@ -72,7 +70,6 @@ const About = () => {
                                 </ul>
                             </div>
 
-                            {/* Skills Card */}
                             <div className="p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800 hover:border-zinc-700 transition-colors">
                                 <h4 className="text-white font-semibold mb-6 flex items-center gap-2">
                                     <span className="w-2 h-2 rounded-full bg-emerald-500"></span>

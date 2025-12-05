@@ -1,27 +1,24 @@
 import { useTranslation } from 'react-i18next';
+import Typewriter from 'typewriter-effect';
 import ScrollArrow from './ScrollArrow';
 
 const Hero = () => {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
+
+    const typewriterKey = i18n.language;
 
     return (
         <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden">
 
-            {/* 1. 背景網格層 (填滿寬螢幕的空洞感) */}
             <div className="absolute inset-0 z-0 pointer-events-none">
                 <div className="absolute inset-0 bg-grid-pattern opacity-[0.6]"></div>
             </div>
-
-            {/* 2. 背景光暈 (增加層次) */}
             <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-indigo-600/20 rounded-full blur-[120px] pointer-events-none mix-blend-screen"></div>
             <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-cyan-600/10 rounded-full blur-[120px] pointer-events-none mix-blend-screen"></div>
 
-            {/* 3. 主要內容容器 */}
-            {/* pb-32: 關鍵修改，透過底部加厚 padding，將視覺重心強制往上推，解決手機版上方太空的問題 */}
             <div className="container mx-auto px-6 relative z-10 w-full max-w-7xl pb-32 md:pb-0">
                 <div className="flex flex-col items-center text-center">
 
-                    {/* Badge */}
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-500/30 bg-indigo-500/10 backdrop-blur-md mb-8 animate-fade-in-up">
                         <span className="relative flex h-2 w-2">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
@@ -32,22 +29,40 @@ const Hero = () => {
                         </span>
                     </div>
 
-                    {/* Main Title - 放大尺寸並加強對比 */}
                     <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter text-white mb-6 leading-[1.1]">
                         <span className="block text-zinc-500 text-2xl sm:text-4xl md:text-5xl font-medium mb-2 tracking-normal">
                             {t('hello')}
                         </span>
-                        <span className="bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-zinc-500">
-                            {t('name')}
+
+                        <span className="inline-block bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-zinc-400">
+                            <Typewriter
+                                key={typewriterKey}
+                                onInit={(typewriter) => {
+                                    typewriter
+                                        .typeString(t('name'))
+                                        .callFunction(() => {
+                                            console.log('String typed out!');
+                                            const cursor = document.querySelector('.Typewriter__cursor') as HTMLElement;
+                                            if (cursor) {
+                                                cursor.style.display = 'none';
+                                            }
+                                        }).start();
+                                }}
+                                options={{
+                                    autoStart: true,
+                                    loop: false,
+                                    delay: 100,
+                                    cursor: '┃',
+                                    cursorClassName: 'Typewriter__cursor text-indigo-400 ml-1 font-light',
+                                }}
+                            />
                         </span>
                     </h1>
 
-                    {/* Subtitle - 限制寬度優化閱讀體驗 */}
                     <p className="text-lg md:text-2xl text-zinc-400 max-w-3xl mx-auto leading-relaxed mb-10 md:mb-12">
                         {t('heroSubtitle')}
                     </p>
 
-                    {/* Buttons */}
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
                         <a
                             href="#projects"
@@ -65,7 +80,6 @@ const Hero = () => {
                 </div>
             </div>
 
-            {/* Scroll Indicator */}
             <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20">
                 <ScrollArrow href="#about" direction='down' />
             </div>
