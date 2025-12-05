@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { BriefcaseIcon, MapPinIcon } from '@heroicons/react/24/solid';
+import { BriefcaseIcon, MapPinIcon, CalendarIcon } from '@heroicons/react/24/solid';
 
 // Interfaces remain the same
 interface Project {
@@ -93,93 +93,143 @@ const Experience = () => {
     ];
 
     return (
-        <section id="experience" className="py-20 bg-gray-50 dark:bg-gray-800">
+        <section id="experience" className="py-24 bg-zinc-950 border-t border-zinc-900 relative">
+            {/* Background decorative elements */}
+            <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-indigo-900/10 blur-[100px] pointer-events-none" />
+
             <div className="container mx-auto px-6">
-                <div className="text-center mb-16">
-                    <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white">
+                <div className="mb-16">
+                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
                         {t('experienceTitle')}
                     </h2>
-                    <p className="text-lg text-gray-500 dark:text-gray-400 mt-2">{t('experienceSubtitle')}</p>
+                    <p className="text-zinc-400">
+                        {t('experienceSubtitle')}
+                    </p>
                 </div>
 
-                <div className="relative border-l-2 border-indigo-200 dark:border-indigo-800 ml-6 md:ml-0">
+                <div className="relative space-y-12">
+                    {/* The main vertical line */}
+                    <div className="absolute left-4 md:left-9 top-4 bottom-4 w-px bg-zinc-800"></div>
+
                     {experiences.map((exp, index) => (
-                        <div key={index} className="mb-12 relative">
-                            <div className="absolute -left-[13px] top-1 w-6 h-6 bg-indigo-500 rounded-full border-4 border-white dark:border-gray-800"></div>
+                        <div key={index} className="relative pl-12 md:pl-24 group">
 
-                            <div className="ml-10">
-                                {/* Company Header */}
-                                <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg mb-4">
-                                    <div className="flex items-center">
-                                        <BriefcaseIcon className="h-6 w-6 text-indigo-500 mr-3 flex-shrink-0" />
-                                        <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                                            {t(exp.company)}
-                                        </h3>
-                                    </div>
-                                    <p className="text-gray-600 dark:text-gray-400 mt-2 flex items-center">
-                                        <MapPinIcon className="h-4 w-4 text-gray-400 mr-2 flex-shrink-0" />
-                                        {/* FIX: Re-added the Google Maps link */}
-                                        <a
-                                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(t(exp.company))}`}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="text-sm hover:underline hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors"
-                                        >
-                                            {t(exp.location)}
-                                        </a>
-                                    </p>
+                            {/* Company Logo Node (Visual Anchor) */}
+                            <div className="absolute left-0 md:left-5 top-0 w-9 h-9 bg-zinc-900 border border-zinc-700 rounded-full flex items-center justify-center z-10 group-hover:border-indigo-500 group-hover:scale-110 transition-all duration-300 shadow-[0_0_10px_rgba(0,0,0,0.5)]">
+                                <BriefcaseIcon className="w-4 h-4 text-zinc-400 group-hover:text-indigo-400" />
+                            </div>
+
+                            {/* Company Header Card */}
+                            <div className="mb-8">
+                                <h3 className="text-2xl font-bold text-white group-hover:text-indigo-400 transition-colors inline-flex items-center gap-3">
+                                    {t(exp.company)}
+                                </h3>
+                                <div className="flex items-center mt-2 text-sm text-zinc-500">
+                                    <MapPinIcon className="w-4 h-4 mr-1.5" />
+                                    <a
+                                        href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(t(exp.company))}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-zinc-300 hover:underline transition-colors"
+                                    >
+                                        {t(exp.location)}
+                                    </a>
                                 </div>
+                            </div>
 
-                                {/* Positions Details */}
-                                <div className="space-y-8">
-                                    {exp.positions.map((pos, posIndex) => (
-                                        <div key={posIndex} className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md">
-                                            <h4 className="text-lg font-semibold text-indigo-600 dark:text-indigo-400">{t(pos.title)}</h4>
-                                            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{pos.duration}</p>
+                            {/* Positions List */}
+                            <div className="space-y-8">
+                                {exp.positions.map((pos, posIndex) => (
+                                    <div key={posIndex} className="relative bg-zinc-900/30 border border-zinc-800/50 rounded-2xl p-6 md:p-8 hover:bg-zinc-900/50 hover:border-zinc-700 transition-all duration-300">
 
-                                            {pos.responsibilities && (
-                                                <div className="mt-4">
-                                                    <h5 className="font-medium text-gray-800 dark:text-white mb-2">{t('responsibilitiesLabel')}:</h5>
-                                                    <ul className="list-disc list-inside space-y-1 text-gray-700 dark:text-gray-300 text-sm">
-                                                        {pos.responsibilities.map((res, resIndex) => <li key={resIndex}>{t(res)}</li>)}
-                                                    </ul>
-                                                </div>
-                                            )}
+                                        {/* Position Header */}
+                                        <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-2">
+                                            <h4 className="text-xl font-semibold text-white">
+                                                {t(pos.title)}
+                                            </h4>
+                                            <div className="flex items-center text-indigo-400/80 text-sm font-mono bg-indigo-500/10 px-3 py-1 rounded-full w-fit">
+                                                <CalendarIcon className="w-4 h-4 mr-2" />
+                                                {pos.duration}
+                                            </div>
+                                        </div>
 
-                                            {pos.contributions && (
-                                                <div className="mt-4">
-                                                    <h5 className="font-medium text-gray-800 dark:text-white mb-2">{t('contributionsLabel')}:</h5>
-                                                    <ul className="list-disc list-inside space-y-1 text-gray-700 dark:text-gray-300 text-sm">
-                                                        {pos.contributions.map((con, conIndex) => <li key={conIndex}>{t(con)}</li>)}
-                                                    </ul>
-                                                </div>
-                                            )}
+                                        {/* Tech Stack Chips */}
+                                        {pos.technologies && (
+                                            <div className="flex flex-wrap gap-2 mb-6">
+                                                {pos.technologies.map((tech) => (
+                                                    <span key={tech} className="px-2.5 py-1 text-xs font-medium text-zinc-400 bg-zinc-800/80 rounded border border-zinc-700">
+                                                        {tech}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        )}
 
-                                            {pos.projects && (
-                                                <div className="mt-4 space-y-4">
+                                        {/* Responsibilities */}
+                                        {pos.responsibilities && (
+                                            <div className="mb-6">
+                                                <h5 className="text-sm font-semibold text-zinc-300 mb-3 uppercase tracking-wider">
+                                                    {t('responsibilitiesLabel')}
+                                                </h5>
+                                                <ul className="space-y-2">
+                                                    {pos.responsibilities.map((res, resIndex) => (
+                                                        <li key={resIndex} className="text-zinc-400 text-sm pl-4 relative border-l-2 border-zinc-800">
+                                                            {t(res)}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        )}
+
+                                        {/* Contributions */}
+                                        {pos.contributions && (
+                                            <div className="mb-6">
+                                                <h5 className="text-sm font-semibold text-zinc-300 mb-3 uppercase tracking-wider">
+                                                    {t('contributionsLabel')}
+                                                </h5>
+                                                <ul className="space-y-2">
+                                                    {pos.contributions.map((con, conIndex) => (
+                                                        <li key={conIndex} className="text-zinc-400 text-sm pl-4 relative border-l-2 border-indigo-500/30">
+                                                            {t(con)}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        )}
+
+                                        {/* Projects within Position */}
+                                        {pos.projects && (
+                                            <div className="mt-8 space-y-4">
+                                                <h5 className="text-sm font-semibold text-zinc-300 uppercase tracking-wider">
+                                                    Key Projects
+                                                </h5>
+                                                <div className="grid grid-cols-1 gap-4">
                                                     {pos.projects.map((project, projectIndex) => (
-                                                        <div key={projectIndex} className="border-t pt-3 dark:border-gray-700">
-                                                            <h5 className="font-medium text-gray-800 dark:text-white">{t(project.name)}</h5>
-                                                            <p className="text-sm text-gray-700 dark:text-gray-300"><span className="font-semibold">{t('role')}:</span> {t(project.role)}</p>
-                                                            <p className="text-sm text-gray-700 dark:text-gray-300 mt-1"><span className="font-semibold">{t('description')}:</span> {t(project.description)}</p>
+                                                        <div key={projectIndex} className="bg-black/20 p-4 rounded-xl border border-zinc-800/50">
+                                                            <div className="flex justify-between items-start mb-2">
+                                                                <h6 className="font-bold text-white text-base">
+                                                                    {t(project.name)}
+                                                                </h6>
+                                                                <span className="text-xs text-zinc-500 bg-zinc-900 px-2 py-0.5 rounded">
+                                                                    {t(project.role)}
+                                                                </span>
+                                                            </div>
+                                                            <p className="text-sm text-zinc-400 mb-3">
+                                                                {t(project.description)}
+                                                            </p>
+                                                            <div className="flex flex-wrap gap-1.5">
+                                                                {project.technologies.map((tech) => (
+                                                                    <span key={tech} className="text-[10px] px-2 py-0.5 bg-indigo-500/10 text-indigo-300 rounded border border-indigo-500/20">
+                                                                        {tech}
+                                                                    </span>
+                                                                ))}
+                                                            </div>
                                                         </div>
                                                     ))}
                                                 </div>
-                                            )}
-
-                                            {pos.technologies && (
-                                                <div className="mt-4">
-                                                    <h5 className="font-medium text-gray-800 dark:text-white mb-2">{t('technologiesLabel')}:</h5>
-                                                    <div className="flex flex-wrap gap-2">
-                                                        {pos.technologies.map((tech) => (
-                                                            <span key={tech} className="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs font-medium px-3 py-1 rounded-full">{tech}</span>
-                                                        ))}
-                                                    </div>
-                                                </div>
-                                            )}
-                                        </div>
-                                    ))}
-                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     ))}

@@ -1,17 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { GlobeAltIcon } from '@heroicons/react/24/outline';
-import myLogo from '../assets/logo.png';
+// 移除 logo 圖片，改用文字或 SVG 讓視覺更乾淨，或者保留 logo 但縮小
 
 interface NavbarProps {
     isScrolled: boolean;
     activeSection: string;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ isScrolled, activeSection }) => {
-
+const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
     const { t, i18n } = useTranslation();
-    const [isOpen, setIsOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => setScrolled(window.scrollY > 20);
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const navItems = [
         { href: '#about', labelKey: 'about' },
@@ -19,88 +24,53 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled, activeSection }) => {
         { href: '#projects', labelKey: 'projects' },
     ];
 
-    const handleLanguageToggle = () => {
-        const newLang = i18n.language === 'zh' ? 'en' : 'zh';
-        i18n.changeLanguage(newLang);
+    const toggleLanguage = () => {
+        i18n.changeLanguage(i18n.language === 'zh' ? 'en' : 'zh');
     };
-
-    const getLinkClass = (href: string, isMobile: boolean = false) => {
-        const isActive = activeSection === href.substring(1);
-        const baseClasses = isMobile ? "block px-3 py-2 rounded-md text-base font-medium" : "px-3 py-2 rounded-md text-sm font-medium";
-        const activeClasses = isMobile ? "bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400" : "text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950";
-        const inactiveClasses = "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-indigo-600 dark:hover:text-indigo-400";
-
-        return `${baseClasses} ${isActive ? activeClasses : inactiveClasses}`;
-    };
-
-    const navClass = isScrolled
-        ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg shadow-md'
-        : 'bg-transparent';
 
     return (
-        <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navClass}`}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-16">
-                    <div className="flex-shrink-0">
-                        <a href="#hero" className="text-black dark:text-white font-bold text-xl" aria-label="Home">
-                            <img
-                                src={myLogo}
-                                alt="MyLogo"
-                                className="h-10 w-auto"
-                            />
-                        </a>
-                    </div>
-                    <div className="hidden md:block">
-                        <div className="ml-10 flex items-center space-x-4">
-                            {navItems.map(item => (
-                                <a key={item.href} href={item.href} className={getLinkClass(item.href)}>
-                                    {t(item.labelKey)}
-                                </a>
-                            ))}
-                            <button
-                                onClick={handleLanguageToggle}
-                                className="p-2 rounded-full bg-gray-50 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+        <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
+            <nav className={`
+                flex items-center gap-1 px-2 py-2 rounded-full transition-all duration-300
+                ${scrolled ? 'bg-zinc-900/80 border border-white/10 shadow-xl backdrop-blur-md' : 'bg-transparent'}
+            `}>
+                {/* Home Link / Logo Area */}
+                <a href="#hero" className="px-4 py-2 font-bold text-white hover:text-indigo-400 transition-colors">
+                    SC.
+                </a>
+
+                {/* Desktop Nav */}
+                <div className="hidden md:flex items-center">
+                    {navItems.map((item) => {
+                        const isActive = activeSection === item.href.substring(1);
+                        return (
+                            <a
+                                key={item.href}
+                                href={item.href}
+                                className={`
+                                    px-4 py-2 rounded-full text-sm font-medium transition-all duration-300
+                                    ${isActive
+                                        ? 'bg-white/10 text-white'
+                                        : 'text-zinc-400 hover:text-white hover:bg-white/5'}
+                                `}
                             >
-                                <GlobeAltIcon className="h-5 w-5 text-gray-500 dark:text-gray-300" aria-hidden="true" />
-                            </button>
-                        </div>
-                    </div>
-                    <div className="-mr-2 flex md:hidden">
-                        <button
-                            onClick={handleLanguageToggle}
-                            className="p-2 rounded-full bg-gray-50 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none" >
-                            <GlobeAltIcon className="h-5 w-5 text-gray-500 dark:text-gray-300" aria-hidden="true" />
-                        </button>
-                        <button
-                            onClick={() => setIsOpen(!isOpen)}
-                            type="button"
-                            className="ml-2 bg-gray-200 dark:bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-gray-300 dark:hover:bg-gray-700 focus:outline-none"
-                            aria-controls="mobile-menu"
-                            aria-expanded={isOpen} >
-                            <span className="sr-only">Open main menu</span>
-                            {/* Icon for menu toggle when closed */}
-                            {!isOpen ? (
-                                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-                                </svg>
-                            ) : (
-                                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            )}
-                        </button>
-                    </div>
+                                {t(item.labelKey)}
+                            </a>
+                        );
+                    })}
                 </div>
-            </div>
-            {isOpen && (
-                <div className="md:hidden  bg-white dark:bg-gray-900" id="mobile-menu">
-                    <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                        <a href="#experience" className="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-indigo-600 dark:hover:text-indigo-400 block px-3 py-2 rounded-md text-base font-medium">{t('experience')}</a>
-                        <a href="#" className="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-indigo-600 dark:hover:text-indigo-400 block px-3 py-2 rounded-md text-base font-medium">{t('projects')}</a>
-                    </div>
-                </div>
-            )}
-        </nav>
+
+                <div className="w-px h-4 bg-white/10 mx-2 hidden md:block"></div>
+
+                <button
+                    onClick={toggleLanguage}
+                    className="p-2 rounded-full text-zinc-400 hover:text-white hover:bg-white/10 transition-all"
+                    aria-label="Toggle Language"
+                >
+                    <GlobeAltIcon className="w-5 h-5" />
+                </button>
+            </nav>
+        </div>
     );
 };
 

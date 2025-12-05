@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
+import { ArrowUpRightIcon } from '@heroicons/react/24/outline'; // 確保安裝了 @heroicons/react
 import ScrollArrow from './ScrollArrow';
 import portfolioLogo from '../assets/logo.png';
 
@@ -10,6 +10,8 @@ interface Project {
     technologies: string[];
     link: string;
     image: string;
+    // 新增 colSpan 控制 Bento Grid 佈局
+    colSpan: string;
 }
 
 const Projects = () => {
@@ -20,71 +22,102 @@ const Projects = () => {
             nameKey: 'bentleyProjectName',
             descriptionKey: 'bentleyProjectDescription',
             architectureKey: 'bentleyProjectArchitecture',
-            technologies: ['Angular', 'Node.js', 'CSS/Sass', 'WebSocket', 'Yocto Linux', 'Unix Socket', 'Serial Port', 'Shell Script'],
+            technologies: ['Angular', 'Node.js', 'Yocto Linux', 'WebSocket'],
             link: 'https://www.whichcar.com.au/news/bentley-rear-seats-entertainment-system',
             image: 'https://s1.cdn.autoevolution.com/images/news/gallery/bentley-unveils-new-entertainment-system-so-you-can-netflix-and-chill-in-your-bentayga_2.jpg',
+            colSpan: 'md:col-span-2', // 大卡片
         },
         {
             nameKey: 'vigorplusProjectName',
             descriptionKey: 'vigorplusProjectDescription',
             architectureKey: 'vigorplusProjectArchitecture',
-            technologies: ['Android', 'Kotlin', 'VLC', 'RTSP'],
+            technologies: ['Android', 'Kotlin', 'RTSP', 'VLC'],
             link: 'https://play.google.com/store/apps/details?id=com.jetopto.vigorplus.products&hl=zh_TW',
-            image: 'https://play-lh.googleusercontent.com/AZ89SOsTvmON-9iYCFKKknSRN5jJIw8zbn8JRv1Ahcg1034Z6oq4TmMl26TKTB7d6vs=w240-h480-rw',
+            image: 'https://play-lh.googleusercontent.com/AZ89SOsTvmON-9iYCFKKknSRN5jJIw8zbn8JRv1Ahcg1034Z6oq4TmMl26TKTB7d6vs=w240-h480-rw', // 建議檢查這個連結是否有效，若無效請換圖
+            colSpan: 'md:col-span-1', // 小卡片
         },
         {
             nameKey: 'portfolioProjectName',
             descriptionKey: 'portfolioProjectDescription',
             architectureKey: 'portfolioProjectArchitecture',
-            technologies: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Firebase', 'GitHub Actions'],
+            technologies: ['React', 'Vite', 'Tailwind', 'CI/CD'],
             link: 'https://github.com/sheldonchangl/myportfolio',
             image: portfolioLogo,
+            colSpan: 'md:col-span-3', // 全寬卡片
         },
     ];
 
     return (
-        <section id="projects" className="relative py-20 bg-white dark:bg-gray-900 overflow-hidden">
-            <div className="container mx-auto">
-                <div className="text-center mb-16 px-6">
-                    <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white">{t('projects')}</h2>
+        <section id="projects" className="py-24 bg-zinc-950/50">
+            <div className="container mx-auto px-6">
+                <div className="flex flex-col md:flex-row justify-between items-end mb-16">
+                    <div>
+                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                            {t('projects')}
+                        </h2>
+                        <p className="text-zinc-400 max-w-xl">
+                            Selected works showcasing full-stack capabilities and system architecture design.
+                        </p>
+                    </div>
                 </div>
-                <div className="
-                    flex overflow-x-auto snap-x snap-mandatory space-x-6 px-6 pb-8
-                    md:grid md:grid-cols-2 md:gap-10 md:space-x-0 md:px-6 md:pb-0
-                    lg:grid-cols-3
-                ">
+
+                {/* Bento Grid Layout */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {projectData.map((project, index) => (
-                        <div key={index} className="flex-shrink-0 w-11/12 snap-center md:w-auto">
-                            <div className="bg-gray-50 dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden flex flex-col h-full transform hover:-translate-y-2 transition-transform duration-300 ease-in-out">
-                                <img src={project.image} alt={t(project.nameKey)} className="w-full h-56 object-cover" />
-                                <div className="p-6 flex flex-col flex-grow">
-                                    <div className="flex-grow">
-                                        <h3 className="text-xl font-bold text-gray-900 dark:text-white">{t(project.nameKey)}</h3>
-                                        <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm flex-grow">{t(project.descriptionKey)}</p>
-                                        <div className="mt-4">
-                                            <h4 className="font-semibold text-gray-800 dark:text-white text-base">{t('technologiesLabel')}</h4>
-                                            <div className="flex flex-wrap gap-2 mt-2">
-                                                {project.technologies.map((tech, i) => (
-                                                    <span key={i} className="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs font-medium px-3 py-1 rounded-full">{tech}</span>
-                                                ))}
-                                            </div>
+                        <a
+                            key={index}
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`
+                                group relative overflow-hidden rounded-2xl bg-zinc-900 border border-zinc-800 
+                                hover:border-indigo-500/50 transition-all duration-300 ${project.colSpan}
+                            `}
+                        >
+                            <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent z-10" />
+
+                            {/* Image Background with Zoom Effect */}
+                            <img
+                                src={project.image}
+                                alt={t(project.nameKey)}
+                                className="w-full h-full object-cover absolute inset-0 group-hover:scale-105 transition-transform duration-700 ease-out opacity-60 group-hover:opacity-40"
+                            />
+
+                            <div className="relative z-20 p-8 h-full flex flex-col justify-end">
+                                <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                    <div className="flex justify-between items-start mb-2">
+                                        <h3 className="text-2xl font-bold text-white">
+                                            {t(project.nameKey)}
+                                        </h3>
+                                        <div className="p-2 bg-white/10 rounded-full backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <ArrowUpRightIcon className="w-5 h-5 text-white" />
                                         </div>
-                                        <p className="mt-3 text-gray-500 dark:text-gray-400 text-xs italic">{t(project.architectureKey)}</p>
                                     </div>
-                                    <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700 text-right">
-                                        <a href={project.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-indigo-600 dark:text-indigo-400 hover:underline font-semibold">
-                                            {t('learnMore')}
-                                            <ArrowTopRightOnSquareIcon className="ml-2 h-4 w-4" />
-                                        </a>
+
+                                    <p className="text-zinc-300 mb-4 line-clamp-2 group-hover:line-clamp-none transition-all">
+                                        {t(project.descriptionKey)}
+                                    </p>
+
+                                    <div className="flex flex-wrap gap-2 mt-4">
+                                        {project.technologies.map((tech, i) => (
+                                            <span
+                                                key={i}
+                                                className="px-3 py-1 text-xs font-mono text-indigo-300 bg-indigo-500/10 rounded-full border border-indigo-500/20"
+                                            >
+                                                {tech}
+                                            </span>
+                                        ))}
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     ))}
                 </div>
             </div>
 
-            <ScrollArrow href="#hero" direction="up" />
+            <div className="relative h-20 mt-10">
+                <ScrollArrow href="#hero" direction="up" />
+            </div>
         </section>
     );
 };

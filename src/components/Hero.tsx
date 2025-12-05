@@ -1,99 +1,74 @@
-import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import ScrollArrow from './ScrollArrow';
 
 const Hero = () => {
     const { t } = useTranslation();
-    const imageRef = useRef<HTMLImageElement>(null);
-    const [rotation, setRotation] = useState({ x: 0, y: 0 });
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-    useEffect(() => {
-        const handleResize = () => {
-            setWindowWidth(window.innerWidth);
-        };
-
-        window.addEventListener('resize', handleResize);
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
-
-    useEffect(() => {
-        const handleMouseMove = (event: MouseEvent) => {
-            if (!imageRef.current) return;
-            const { clientX, clientY } = event;
-            const rect = imageRef.current.getBoundingClientRect();
-
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-
-            const deltaX = clientX - centerX;
-            const deltaY = clientY - centerY;
-
-            const rotationY = (deltaX / rect.width) * 15;
-            const rotationX = -(deltaY / rect.height) * 15;
-
-            setRotation({ x: rotationX, y: rotationY });
-        };
-
-        const handleMouseLeaveWindow = (event: MouseEvent) => {
-            if (event.relatedTarget === null || event.relatedTarget === undefined) {
-                setRotation({ x: 0, y: 0 });
-            }
-        };
-
-        // Only add listener if not on a "mobile" screen size (e.g., width >= 768px for desktop)
-        if (windowWidth >= 768) {
-            window.addEventListener('mousemove', handleMouseMove);
-            document.documentElement.addEventListener('mouseleave', handleMouseLeaveWindow);
-        } else {
-            // Reset rotation if it's mobile and listener is removed
-            setRotation({ x: 0, y: 0 });
-        }
-
-        return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-        };
-    }, [windowWidth]);
 
     return (
-        <section id="hero" className="relative flex items-center min-h-screen bg-gradient-to-br from-indigo-50 via-white to-cyan-100 dark:from-indigo-900 dark:via-gray-900 dark:to-cyan-900 pt-24 pb-12">
-            <div className="container mx-auto px-6">
-                <div className="flex flex-col md:flex-row items-center justify-center gap-12">
+        <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden">
 
-                    <div className="md:w-1/2 text-center md:text-left">
-                        <h1 className="text-left text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-gray-900 dark:text-white leading-tight">
-                            <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl ">{t('hello')}</span>
-                            <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-indigo-600 dark:text-indigo-400 mt-2">{t('name')}</span>
-                        </h1>
-                        <p className="mt-6 max-w-xl mx-auto md:mx-0 text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300">
-                            {t('heroSubtitle')}
-                        </p>
-                        <div className="mt-8">
-                            <a href="#about"
-                                className="inline-block bg-indigo-100 text-indigo-800 font-bold py-3 px-8 rounded-md hover:bg-indigo-200 transition-colors duration-300 shadow-lg text-lg dark:bg-transparent dark:border dark:border-indigo-400 dark:text-indigo-400 dark:hover:bg-indigo-900"    >
-                                {t('learnMore')}
-                            </a>
-                        </div>
+            {/* 1. 背景網格層 (填滿寬螢幕的空洞感) */}
+            <div className="absolute inset-0 z-0 pointer-events-none">
+                <div className="absolute inset-0 bg-grid-pattern opacity-[0.6]"></div>
+            </div>
+
+            {/* 2. 背景光暈 (增加層次) */}
+            <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-indigo-600/20 rounded-full blur-[120px] pointer-events-none mix-blend-screen"></div>
+            <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-cyan-600/10 rounded-full blur-[120px] pointer-events-none mix-blend-screen"></div>
+
+            {/* 3. 主要內容容器 */}
+            {/* pb-32: 關鍵修改，透過底部加厚 padding，將視覺重心強制往上推，解決手機版上方太空的問題 */}
+            <div className="container mx-auto px-6 relative z-10 w-full max-w-7xl pb-32 md:pb-0">
+                <div className="flex flex-col items-center text-center">
+
+                    {/* Badge */}
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-500/30 bg-indigo-500/10 backdrop-blur-md mb-8 animate-fade-in-up">
+                        <span className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                        </span>
+                        <span className="text-indigo-300 text-xs md:text-sm font-mono tracking-wide uppercase">
+                            Senior Software Engineer
+                        </span>
                     </div>
 
-                    <div className="md:w-1/3">
-                        <div className="relative w-64 h-64 sm:w-80 sm:h-80 mx-auto">
-                            <div className="absolute inset-0 bg-gradient-to-br from-indigo-400 to-cyan-400 rounded-full shadow-2xl hero-gradient-spin"></div>
-                            <img ref={imageRef} src="/profile_circle.png"
-                                alt={t('name')}
-                                className="relative w-full h-full object-cover rounded-full border-4 border-white dark:border-gray-800 transition-transform duration-75 ease-out"
-                                style={{
-                                    transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`,
-                                }}
-                            />
-                        </div>
+                    {/* Main Title - 放大尺寸並加強對比 */}
+                    <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter text-white mb-6 leading-[1.1]">
+                        <span className="block text-zinc-500 text-2xl sm:text-4xl md:text-5xl font-medium mb-2 tracking-normal">
+                            {t('hello')}
+                        </span>
+                        <span className="bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-zinc-500">
+                            {t('name')}
+                        </span>
+                    </h1>
+
+                    {/* Subtitle - 限制寬度優化閱讀體驗 */}
+                    <p className="text-lg md:text-2xl text-zinc-400 max-w-3xl mx-auto leading-relaxed mb-10 md:mb-12">
+                        {t('heroSubtitle')}
+                    </p>
+
+                    {/* Buttons */}
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
+                        <a
+                            href="#projects"
+                            className="group relative w-full sm:w-auto px-8 py-3.5 bg-white text-black font-bold text-lg rounded-full hover:bg-zinc-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)]"
+                        >
+                            {t('projects')}
+                        </a>
+                        <a
+                            href="#about"
+                            className="w-full sm:w-auto px-8 py-3.5 border border-zinc-700 text-white font-medium text-lg rounded-full hover:bg-zinc-800 hover:border-zinc-500 transition-colors bg-black/50 backdrop-blur-sm"
+                        >
+                            {t('learnMore')}
+                        </a>
                     </div>
                 </div>
             </div>
 
-            <ScrollArrow href="#about" direction='down'/>
+            {/* Scroll Indicator */}
+            <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20">
+                <ScrollArrow href="#about" direction='down' />
+            </div>
         </section>
     );
 };
